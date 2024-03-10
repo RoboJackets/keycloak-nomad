@@ -30,7 +30,7 @@ job "keycloak" {
           "-xeuo",
           "pipefail",
           "-c",
-          "/opt/keycloak/bin/kc.sh build --cache local --db mysql --features declarative-user-profile --features-disabled kerberos,authorization,ciba,client-policies,device-flow,js-adapter,par,step-up-authentication --health-enabled true && /opt/keycloak/bin/kc.sh start --optimized"
+          "/opt/keycloak/bin/kc.sh build && /opt/keycloak/bin/kc.sh start --optimized"
         ]
 
         mount {
@@ -53,7 +53,19 @@ job "keycloak" {
 {{- range $key, $value := (key "keycloak" | parseJSON) -}}
 {{- $key | trimSpace -}}={{- $value | toJSON }}
 {{ end -}}
+KC_CACHE=local
+KC_DB=mysql
+KC_FEATURES=declarative-user-profile
+KC_FEATURES_DISABLED=kerberos,authorization,ciba,client-policies,device-flow,js-adapter,par,step-up-authentication
 KC_HTTP_PORT={{ env "NOMAD_PORT_http" }}
+KC_HTTP_HOST=127.0.0.1
+KC_HOSTNAME={{- with (key "nginx/hostnames" | parseJSON) -}}{{- index . (env "NOMAD_JOB_NAME") -}}{{- end }}
+KC_HOSTNAME_STRICT_BACKCHANNEL=true
+KC_HEALTH_ENABLED=true
+KC_PROXY=edge
+{{ if eq (env "NOMAD_JOB_NAME") "keycloak-test" }}
+KC_DB=dev-mem
+{{ end }}
 EOH
 
         destination = "/secrets/.env"
@@ -70,6 +82,8 @@ EOH
         name = "${NOMAD_JOB_NAME}"
 
         port = "http"
+
+        address = "127.0.0.1"
 
         tags = [
           "http"
