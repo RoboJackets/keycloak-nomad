@@ -55,7 +55,7 @@ job "keycloak" {
 {{ end -}}
 KC_CACHE=local
 KC_DB=mysql
-KC_FEATURES_DISABLED=kerberos,authorization,ciba,client-policies,device-flow,js-adapter,par,step-up-authentication,hostname-v1
+KC_FEATURES_DISABLED=kerberos,authorization,ciba,client-policies,device-flow,js-adapter,par,step-up-authentication
 KC_HTTP_PORT={{ env "NOMAD_PORT_http" }}
 KC_HTTP_HOST=127.0.0.1
 KC_HOSTNAME={{- with (key "nginx/hostnames" | parseJSON) -}}{{- index . (env "NOMAD_JOB_NAME") -}}{{- end }}
