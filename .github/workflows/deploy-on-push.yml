@@ -1,0 +1,28 @@
+name: Build
+on:
+  - push
+jobs:
+
+  deploy-test:
+    name: Deploy
+    uses: ./.github/workflows/deploy-single-environment.yml
+    concurrency:
+      group: deploy-test
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      environment: test
+
+  deploy-production:
+    name: Deploy
+    needs: [deploy-test]
+    uses: ./.github/workflows/deploy-single-environment.yml
+    if: ${{ github.ref == 'refs/heads/main' }}
+    concurrency:
+      group: deploy-production
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      environment: production
