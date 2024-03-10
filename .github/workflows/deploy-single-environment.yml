@@ -45,3 +45,11 @@ jobs:
           NOMAD_ADDR: https://nomad.bcdc.robojackets.net
         run: |
           nomad run keycloak.nomad
+
+      - name: Wait for service to become healthy
+        timeout-minutes: 1
+        run: |
+          until curl -vvv --fail ${{ inputs.environment == 'test' && 'https://keycloak-test.robojackets.org/health' || 'https://keycloak.robojackets.org/health' }}
+          do
+            sleep 1
+          done
