@@ -67,7 +67,7 @@ EOH
       }
 
       service {
-        name = "keycloak"
+        name = "${NOMAD_JOB_NAME}"
 
         port = "http"
 
