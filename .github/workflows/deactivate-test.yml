@@ -1,0 +1,40 @@
+name: Deactivate Test
+
+on:
+  schedule:
+    - cron:  '0 16 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    name: Deactivate Test
+    permissions:
+      id-token: write
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Nomad
+        uses: lucasmelin/setup-nomad@v2.0.0
+
+      - name: Exchange GitHub JWT for Nomad token
+        uses: mikenomitch/nomad-jwt-auth@v0.1.0
+        with:
+          url: https://nomad.bcdc.robojackets.net
+          jwtGithubAudience: https://nomad.bcdc.robojackets.net
+          methodName: GitHub
+
+      - name: Stop Nomad job
+        env:
+          NOMAD_ADDR: https://nomad.bcdc.robojackets.net
+        continue-on-error: true
+        run: |
+          nomad stop keycloak-test
+
+      - name: Deactivate deployment in GitHub
+        uses: strumwolf/delete-deployment-environment@v3
+        with:
+          environment: test
+          onlyDeactivateDeployments: true
