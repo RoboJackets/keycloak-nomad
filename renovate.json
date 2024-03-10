@@ -15,7 +15,7 @@
             "matchStrings": ["\"quay\\.io\\/keycloak\\/keycloak:(?<currentValue>.+)\""],
             "depNameTemplate": "quay.io/keycloak/keycloak",
             "datasourceTemplate": "docker",
-            "versioning": "semver"
+            "versioningTemplate": "semver"
         }
     ]
 }
