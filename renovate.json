@@ -14,7 +14,8 @@
             "fileMatch": ["^keycloak.nomad$"],
             "matchStrings": ["\"quay\\.io\\/keycloak\\/keycloak:(?<currentValue>.+)\""],
             "depNameTemplate": "quay.io/keycloak/keycloak",
-            "datasourceTemplate": "docker"
+            "datasourceTemplate": "docker",
+            "versioning": "semver"
         }
     ]
 }
