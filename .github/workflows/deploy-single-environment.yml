@@ -49,7 +49,7 @@ jobs:
       - name: Wait for service to become healthy
         timeout-minutes: 1
         run: |
-          until curl -vvv --fail ${{ inputs.environment == 'test' && 'https://keycloak-test.robojackets.org/health' || 'https://keycloak.robojackets.org/health' }}
+          until curl --fail ${{ inputs.environment == 'test' && 'https://keycloak-test.robojackets.org/health' || 'https://keycloak.robojackets.org/health' }}
           do
             sleep 1
           done
