@@ -30,7 +30,6 @@ jobs:
         uses: lucasmelin/setup-nomad@v2.0.0
 
       - name: Set job name
-        working-directory: ./.nomad/
         run: |
           sed -i '/job "keycloak" {/c\job "keycloak-${{ inputs.environment }}" {' keycloak.nomad
 
