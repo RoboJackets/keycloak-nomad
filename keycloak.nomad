@@ -55,7 +55,6 @@ job "keycloak" {
 {{ end -}}
 KC_CACHE=local
 KC_DB=mysql
-KC_FEATURES=declarative-user-profile
 KC_FEATURES_DISABLED=kerberos,authorization,ciba,client-policies,device-flow,js-adapter,par,step-up-authentication
 KC_HTTP_PORT={{ env "NOMAD_PORT_http" }}
 KC_HTTP_HOST=127.0.0.1
