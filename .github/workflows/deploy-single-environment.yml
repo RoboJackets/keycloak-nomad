@@ -35,8 +35,8 @@ jobs:
 
       - name: Generate initial username and password
         run: |
-          export KEYCLOAK_USERNAME=$(LC_CTYPE=C tr -d -c '[:alnum:]' </dev/urandom | head -c 64)
-          export KEYCLOAK_PASSWORD=$(LC_CTYPE=C tr -d -c '[:alnum:]' </dev/urandom | head -c 64)
+          export KEYCLOAK_USERNAME=$(echo ${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM} | md5sum | cut --fields=1 --delimiter=" ")
+          export KEYCLOAK_PASSWORD=$(echo ${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM}${RANDOM} | md5sum | cut --fields=1 --delimiter=" ")
           echo "::add-mask::${KEYCLOAK_USERNAME}"
           echo "::add-mask::${KEYCLOAK_PASSWORD}"
 
