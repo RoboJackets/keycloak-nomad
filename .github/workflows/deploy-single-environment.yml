@@ -51,7 +51,7 @@ jobs:
         env:
           NOMAD_ADDR: https://nomad.bcdc.robojackets.net
         run: |
-          nomad run keycloak.nomad -var=admin_username=${KEYCLOAK_USERNAME} -var=admin_password=${KEYCLOAK_PASSWORD}
+          nomad run -var=admin_username=${KEYCLOAK_USERNAME} -var=admin_password=${KEYCLOAK_PASSWORD} keycloak.nomad
 
       - name: Wait for service to become healthy
         timeout-minutes: 1
