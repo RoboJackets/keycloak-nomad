@@ -33,6 +33,13 @@ jobs:
         run: |
           sed -i '/job "keycloak" {/c\job "keycloak-${{ inputs.environment }}" {' keycloak.nomad
 
+      - name: Generate initial username and password
+        run: |
+          KEYCLOAK_USERNAME=$(LC_CTYPE=C tr -d -c '[:alnum:]' </dev/urandom | head -c 64)
+          KEYCLOAK_PASSWORD=$(LC_CTYPE=C tr -d -c '[:alnum:]' </dev/urandom | head -c 64)
+          echo "::add-mask::${KEYCLOAK_USERNAME}"
+          echo "::add-mask::${KEYCLOAK_PASSWORD}"
+
       - name: Exchange GitHub JWT for Nomad token
         uses: mikenomitch/nomad-jwt-auth@v0.1.0
         with:
@@ -44,7 +51,7 @@ jobs:
         env:
           NOMAD_ADDR: https://nomad.bcdc.robojackets.net
         run: |
-          nomad run keycloak.nomad
+          nomad run keycloak.nomad -var=admin_username=${KEYCLOAK_USERNAME} -var=admin_password=${KEYCLOAK_PASSWORD}
 
       - name: Wait for service to become healthy
         timeout-minutes: 1
