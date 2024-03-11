@@ -51,6 +51,10 @@ jobs:
           methodName: GitHub
           exportToken: false
 
+      - name: Mask Nomad token
+        run: |
+          echo "::add-mask::${{ steps.get_token.outputs.nomadToken }}"
+
       - name: Run Nomad job
         env:
           NOMAD_ADDR: https://nomad.bcdc.robojackets.net
