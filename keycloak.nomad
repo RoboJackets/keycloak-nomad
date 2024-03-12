@@ -58,6 +58,14 @@ job "keycloak" {
         }
       }
 
+      artifact {
+        source = "https://artifacts.gatech.aws.robojackets.net/com/dawidgora/unique-attribute-validator-provider/24.0.1-SNAPSHOT/unique-attribute-validator-provider-24.0.1-20240312.230417-3.jar"
+
+        options {
+          checksum = "sha1:9d223675830296167959dccb1e6fe6ee591cd536"
+        }
+      }
+
       template {
         data = <<EOH
 {{- range $key, $value := (key "keycloak" | parseJSON) -}}
