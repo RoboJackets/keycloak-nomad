@@ -44,21 +44,15 @@ jobs:
 
       - name: Exchange GitHub JWT for Nomad token
         id: get_token
-        uses: mikenomitch/nomad-jwt-auth@v0.1.0
+        uses: RoboJackets/nomad-jwt-auth@main
         with:
           url: https://nomad.bcdc.robojackets.net
           jwtGithubAudience: https://nomad.bcdc.robojackets.net
           methodName: GitHub
-          exportToken: false
-
-      - name: Mask Nomad token
-        run: |
-          echo "::add-mask::${{ steps.get_token.outputs.nomadToken }}"
 
       - name: Run Nomad job
         env:
           NOMAD_ADDR: https://nomad.bcdc.robojackets.net
-          NOMAD_TOKEN: ${{ steps.get_token.outputs.nomadToken }}
         run: |
           nomad run -var=admin_username=${KEYCLOAK_USERNAME} -var=admin_password=${KEYCLOAK_PASSWORD} keycloak.nomad
 
