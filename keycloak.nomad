@@ -134,11 +134,13 @@ EOH
         mode = "fail"
       }
     }
+  }
 
-    reschedule {
-      attempts  = 0
-      unlimited = false
-    }
+  reschedule {
+    delay = "10s"
+    delay_function = "fibonacci"
+    max_delay = "60s"
+    unlimited = true
   }
 
   update {
