@@ -23,6 +23,7 @@ job "keycloak" {
 
     network {
       port "http" {}
+      port "management" {}
     }
 
     task "keycloak" {
@@ -74,7 +75,7 @@ job "keycloak" {
 KC_CACHE=local
 KC_DB=mysql
 KC_FEATURES_DISABLED=kerberos,authorization,ciba,client-policies,device-flow,js-adapter,par,step-up-authentication
-KC_HTTP_MANAGEMENT_PORT={{ env "NOMAD_PORT_http" }}
+KC_HTTP_MANAGEMENT_PORT={{ env "NOMAD_PORT_management" }}
 KC_HTTP_PORT={{ env "NOMAD_PORT_http" }}
 KC_HTTP_HOST=127.0.0.1
 KC_HOSTNAME=https://{{- with (key "nginx/hostnames" | parseJSON) -}}{{- index . (env "NOMAD_JOB_NAME") -}}{{- end }}:443
@@ -119,7 +120,7 @@ EOH
 
           name = "HTTP"
           path = "/health"
-          port = "http"
+          port = "management"
           protocol = "http"
           timeout = "1s"
           type = "http"
