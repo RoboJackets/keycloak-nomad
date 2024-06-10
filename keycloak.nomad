@@ -51,18 +51,18 @@ job "keycloak" {
       }
 
       artifact {
-        source = "https://artifacts.gatech.aws.robojackets.net/io/github/johnjcool/keycloak-cas-services/24.0.1-SNAPSHOT/keycloak-cas-services-24.0.1-20240312.011651-5.jar"
+        source = "https://artifacts.gatech.aws.robojackets.net/io/github/johnjcool/keycloak-cas-services/25.0.0-SNAPSHOT/keycloak-cas-services-25.0.0-20240610.220211-3.jar"
 
         options {
-          checksum = "sha1:8a69352e4b05523149a4a01d3dadba26975d21e9"
+          checksum = "sha1:399e8385feab3313c9a811d9943285d6e903a65b"
         }
       }
 
       artifact {
-        source = "https://artifacts.gatech.aws.robojackets.net/com/dawidgora/unique-attribute-validator-provider/24.0.1-SNAPSHOT/unique-attribute-validator-provider-24.0.1-20240312.230417-3.jar"
+        source = "https://artifacts.gatech.aws.robojackets.net/com/dawidgora/unique-attribute-validator-provider/25.0.0-SNAPSHOT/unique-attribute-validator-provider-25.0.0-20240610.220735-4.jar"
 
         options {
-          checksum = "sha1:9d223675830296167959dccb1e6fe6ee591cd536"
+          checksum = "sha1:0b6ee9030e94044ac741da66c60f26dd20049a77"
         }
       }
 
