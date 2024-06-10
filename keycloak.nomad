@@ -23,13 +23,14 @@ job "keycloak" {
 
     network {
       port "http" {}
+      port "management" {}
     }
 
     task "keycloak" {
       driver = "docker"
 
       config {
-        image = "quay.io/keycloak/keycloak:24.0.5"
+        image = "quay.io/keycloak/keycloak:25.0.0"
 
         force_pull = true
 
@@ -51,18 +52,18 @@ job "keycloak" {
       }
 
       artifact {
-        source = "https://artifacts.gatech.aws.robojackets.net/io/github/johnjcool/keycloak-cas-services/24.0.1-SNAPSHOT/keycloak-cas-services-24.0.1-20240312.011651-5.jar"
+        source = "https://artifacts.gatech.aws.robojackets.net/io/github/johnjcool/keycloak-cas-services/25.0.0-SNAPSHOT/keycloak-cas-services-25.0.0-20240610.220211-3.jar"
 
         options {
-          checksum = "sha1:8a69352e4b05523149a4a01d3dadba26975d21e9"
+          checksum = "sha1:399e8385feab3313c9a811d9943285d6e903a65b"
         }
       }
 
       artifact {
-        source = "https://artifacts.gatech.aws.robojackets.net/com/dawidgora/unique-attribute-validator-provider/24.0.1-SNAPSHOT/unique-attribute-validator-provider-24.0.1-20240312.230417-3.jar"
+        source = "https://artifacts.gatech.aws.robojackets.net/com/dawidgora/unique-attribute-validator-provider/25.0.0-SNAPSHOT/unique-attribute-validator-provider-25.0.0-20240610.220735-4.jar"
 
         options {
-          checksum = "sha1:9d223675830296167959dccb1e6fe6ee591cd536"
+          checksum = "sha1:0b6ee9030e94044ac741da66c60f26dd20049a77"
         }
       }
 
@@ -74,10 +75,11 @@ job "keycloak" {
 KC_CACHE=local
 KC_DB=mysql
 KC_FEATURES_DISABLED=kerberos,authorization,ciba,client-policies,device-flow,js-adapter,par,step-up-authentication
+KC_HTTP_MANAGEMENT_PORT={{ env "NOMAD_PORT_management" }}
 KC_HTTP_PORT={{ env "NOMAD_PORT_http" }}
 KC_HTTP_HOST=127.0.0.1
-KC_HOSTNAME={{- with (key "nginx/hostnames" | parseJSON) -}}{{- index . (env "NOMAD_JOB_NAME") -}}{{- end }}
-KC_HOSTNAME_STRICT_BACKCHANNEL=true
+KC_HOSTNAME=https://{{- with (key "nginx/hostnames" | parseJSON) -}}{{- index . (env "NOMAD_JOB_NAME") -}}{{- end }}:443
+KC_HOSTNAME_BACKCHANNEL_DYNAMIC=false
 KC_HEALTH_ENABLED=true
 KC_HTTP_ENABLED=true
 KC_PROXY_HEADERS=forwarded
@@ -85,6 +87,7 @@ KC_PROXY_HEADERS=forwarded
 KC_DB=dev-mem
 KEYCLOAK_ADMIN=${var.admin_username}
 KEYCLOAK_ADMIN_PASSWORD=${var.admin_password}
+KC_HOSTNAME_DEBUG=true
 {{ end }}
 EOH
 
@@ -117,7 +120,7 @@ EOH
 
           name = "HTTP"
           path = "/health"
-          port = "http"
+          port = "management"
           protocol = "http"
           timeout = "1s"
           type = "http"
