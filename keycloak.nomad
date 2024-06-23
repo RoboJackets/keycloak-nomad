@@ -109,8 +109,7 @@ EOH
         address = "127.0.0.1"
 
         tags = [
-          "http",
-          "proxy_cache"
+          "http"
         ]
 
         check {
