@@ -30,7 +30,7 @@ job "keycloak" {
       driver = "docker"
 
       config {
-        image = "quay.io/keycloak/keycloak:25.0.4"
+        image = "quay.io/keycloak/keycloak:25.0.5"
 
         force_pull = true
 
