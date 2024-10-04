@@ -1,13 +1,3 @@
-variable "admin_username" {
-  type = string
-  default = "unused"
-}
-
-variable "admin_password" {
-  type = string
-  default = "unused"
-}
-
 job "keycloak" {
   region = "campus"
 
@@ -85,8 +75,6 @@ KC_HTTP_ENABLED=true
 KC_PROXY_HEADERS=forwarded
 {{ if eq (env "NOMAD_JOB_NAME") "keycloak-test" }}
 KC_DB=dev-mem
-KEYCLOAK_ADMIN=${var.admin_username}
-KEYCLOAK_ADMIN_PASSWORD=${var.admin_password}
 KC_HOSTNAME_DEBUG=true
 {{ end }}
 EOH
