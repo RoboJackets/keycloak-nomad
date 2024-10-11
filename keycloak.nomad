@@ -96,7 +96,7 @@ EOH
           "-xeuo",
           "pipefail",
           "-c",
-          "/opt/keycloak/bin/kc.sh bootstrap-admin user --bootstrap-admin-username $(openssl rand -hex 16) --bootstrap-admin-password $(openssl rand -hex 16)"
+          "/opt/keycloak/bin/kc.sh bootstrap-admin user --bootstrap-admin-username $(head -c 512 /dev/urandom | sha256sum --binary | cut -f 1 -d ' ') --bootstrap-admin-password $(head -c 512 /dev/urandom | sha256sum --binary | cut -f 1 -d ' ')"
         ]
       }
 
