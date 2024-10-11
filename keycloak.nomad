@@ -31,7 +31,7 @@ job "keycloak" {
           "-xeuo",
           "pipefail",
           "-c",
-          "KC_BOOTSTRAP_ADMIN_USERNAME=$(head -c 512 /dev/urandom | sha256sum --binary | cut -f 1 -d ' ') KC_BOOTSTRAP_ADMIN_PASSWORD=$(head -c 512 /dev/urandom | sha256sum --binary | cut -f 1 -d ' ') /opt/keycloak/bin/kc.sh build && /opt/keycloak/bin/kc.sh start --optimized"
+          "/opt/keycloak/bin/kc.sh build && KC_BOOTSTRAP_ADMIN_USERNAME=$(head -c 512 /dev/urandom | sha256sum --binary | cut -f 1 -d ' ') KC_BOOTSTRAP_ADMIN_PASSWORD=$(head -c 512 /dev/urandom | sha256sum --binary | cut -f 1 -d ' ') /opt/keycloak/bin/kc.sh start --optimized"
         ]
 
         mount {
