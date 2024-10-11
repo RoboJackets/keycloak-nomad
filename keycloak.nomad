@@ -31,7 +31,7 @@ job "keycloak" {
           "-xeuo",
           "pipefail",
           "-c",
-          "/opt/keycloak/bin/kc.sh build && /opt/keycloak/bin/kc.sh start --optimized"
+          "KC_BOOTSTRAP_ADMIN_USERNAME=$(head -c 512 /dev/urandom | sha256sum --binary | cut -f 1 -d ' ') KC_BOOTSTRAP_ADMIN_PASSWORD=$(head -c 512 /dev/urandom | sha256sum --binary | cut -f 1 -d ' ') /opt/keycloak/bin/kc.sh build && /opt/keycloak/bin/kc.sh start --optimized"
         ]
 
         mount {
@@ -87,17 +87,6 @@ EOH
         cpu = 100
         memory = 512
         memory_max = 2048
-      }
-
-      action "create-temporary-admin" {
-        command = "/bin/bash"
-
-        args = [
-          "-xeuo",
-          "pipefail",
-          "-c",
-          "/opt/keycloak/bin/kc.sh bootstrap-admin user --no-prompt --bootstrap-admin-username $(head -c 512 /dev/urandom | sha256sum --binary | cut -f 1 -d ' ') --bootstrap-admin-password $(head -c 512 /dev/urandom | sha256sum --binary | cut -f 1 -d ' ')"
-        ]
       }
 
       service {
