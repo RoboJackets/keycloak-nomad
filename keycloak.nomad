@@ -89,6 +89,17 @@ EOH
         memory_max = 2048
       }
 
+      action "create-temporary-admin" {
+        command = "/bin/bash"
+
+        args = [
+          "-xeuo",
+          "pipefail",
+          "-c",
+          "/opt/keycloak/bin/kc.sh bootstrap-admin user --bootstrap-admin-username $(openssl rand -hex 16) --bootstrap-admin-password $(openssl rand -hex 16)"
+        ]
+      }
+
       service {
         name = "${NOMAD_JOB_NAME}"
 
