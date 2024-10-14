@@ -74,7 +74,7 @@ KC_HEALTH_ENABLED=true
 KC_HTTP_ENABLED=true
 KC_PROXY_HEADERS=forwarded
 {{ if eq (env "NOMAD_JOB_NAME") "keycloak-test" }}
-KC_DB=dev-mem
+KC_DB=dev-file
 KC_HOSTNAME_DEBUG=true
 {{ end }}
 EOH
