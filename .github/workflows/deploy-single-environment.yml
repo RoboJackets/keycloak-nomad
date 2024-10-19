@@ -48,7 +48,7 @@ jobs:
           nomad run keycloak.nomad
 
       - name: Wait for service to become healthy
-        timeout-minutes: 1
+        timeout-minutes: 2
         run: |
           until curl --silent --show-error --fail ${{ inputs.environment == 'test' && 'https://keycloak-test.robojackets.org/realms/master/.well-known/openid-configuration' || 'https://keycloak.robojackets.org/realms/master/.well-known/openid-configuration' }}
           do
