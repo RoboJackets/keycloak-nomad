@@ -1,18 +1,22 @@
 {
     "extends": [
-        "config:base"
+        "config:recommended"
     ],
     "prConcurrentLimit": 1,
     "prHourlyLimit": 0,
-    "rebaseStalePrs": true,
+    "rebaseWhen": "behind-base-branch",
     "automerge": true,
     "platformAutomerge": true,
     "rangeStrategy": "pin",
     "customManagers": [
         {
             "customType": "regex",
-            "fileMatch": ["^keycloak.nomad$"],
-            "matchStrings": ["\"quay\\.io\\/keycloak\\/keycloak:(?<currentValue>.+)\""],
+            "fileMatch": [
+                "^keycloak.nomad$"
+            ],
+            "matchStrings": [
+                "\"quay\\.io\\/keycloak\\/keycloak:(?<currentValue>.+)\""
+            ],
             "depNameTemplate": "quay.io/keycloak/keycloak",
             "datasourceTemplate": "docker",
             "versioningTemplate": "semver"
