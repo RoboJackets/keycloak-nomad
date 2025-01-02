@@ -59,9 +59,11 @@ job "keycloak" {
 
       template {
         data = <<EOH
+{{ if eq (env "NOMAD_JOB_NAME") "keycloak-production" }}
 {{- range $key, $value := (key "keycloak" | parseJSON) -}}
 {{- $key | trimSpace -}}={{- $value | toJSON }}
 {{ end -}}
+{{ end }}
 KC_CACHE=local
 KC_DB=mysql
 KC_FEATURES_DISABLED=kerberos,authorization,ciba,client-policies,device-flow,par,step-up-authentication,persistent-user-sessions,organization
