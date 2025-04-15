@@ -19,6 +19,8 @@ job "keycloak" {
     task "keycloak" {
       driver = "docker"
 
+      consul {}
+
       config {
         image = "quay.io/keycloak/keycloak:26.2.0"
 
@@ -66,7 +68,7 @@ job "keycloak" {
 {{ end }}
 KC_CACHE=local
 KC_DB=mysql
-KC_FEATURES_DISABLED=kerberos,authorization,ciba,client-policies,device-flow,par,step-up-authentication,persistent-user-sessions,organization,opentelemetry
+KC_FEATURES_DISABLED=kerberos,ciba,client-policies,device-flow,par,step-up-authentication,persistent-user-sessions,organization,opentelemetry
 KC_HTTP_MANAGEMENT_PORT={{ env "NOMAD_PORT_management" }}
 KC_HTTP_PORT={{ env "NOMAD_PORT_http" }}
 KC_HTTP_HOST=127.0.0.1
