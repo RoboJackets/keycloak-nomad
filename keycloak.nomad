@@ -108,7 +108,7 @@ EOH
           success_before_passing = 3
           failures_before_critical = 2
 
-          interval = "5s"
+          interval = "1s"
 
           name = "Health"
           path = "/health"
@@ -122,7 +122,7 @@ EOH
           success_before_passing = 3
           failures_before_critical = 2
 
-          interval = "5s"
+          interval = "1s"
 
           name = "OIDC Discovery"
           path = "/realms/master/.well-known/openid-configuration"
