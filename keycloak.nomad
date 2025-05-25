@@ -6,11 +6,6 @@ job "keycloak" {
   type = "service"
 
   group "keycloak" {
-    volume "run" {
-      type = "host"
-      source = "run"
-    }
-
     network {
       port "http" {}
       port "management" {}
