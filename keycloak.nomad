@@ -138,7 +138,7 @@ EOH
 
         meta {
           nginx-config = substr(local.nginx_configuration, 0, 511)
-          nginx-config-1 = substr(local.nginx_configuration, 511, 511)
+          nginx-config-more = substr(local.nginx_configuration, 511, 511)
           firewall-rules = jsonencode(["internet"])
           no-default-headers = true
         }
