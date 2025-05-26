@@ -1,7 +1,3 @@
-locals {
-  nginx_configuration = trimspace(trimsuffix(trimspace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(trimspace(file("nginx.conf")),"server\\s{\\s",""),"server_name\\s\\S+;",""),"root\\s\\S+;",""),"listen\\s.+;",""),"#.+\\n",""),";\\s+",";"),"{\\s+","{"),"\\s+"," ")),"}"))
-}
-
 job "keycloak" {
   region = "campus"
 
@@ -137,8 +133,7 @@ EOH
         }
 
         meta {
-          nginx-config = substr(local.nginx_configuration, 0, 511)
-          nginx-config-more = substr(local.nginx_configuration, 511, 511)
+          nginx-config = trimspace(trimsuffix(trimspace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(regex_replace(trimspace(file("nginx.conf")),"server\\s{\\s",""),"server_name\\s\\S+;",""),"root\\s\\S+;",""),"listen\\s.+;",""),"#.+\\n",""),";\\s+",";"),"{\\s+","{"),"\\s+"," ")),"}"))
           firewall-rules = jsonencode(["internet"])
           no-default-headers = true
         }
