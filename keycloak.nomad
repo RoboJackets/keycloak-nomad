@@ -39,10 +39,10 @@ job "keycloak" {
       }
 
       artifact {
-        source = "https://artifacts.gatech.aws.robojackets.net/io/github/johnjcool/keycloak-cas-services/25.0.5-SNAPSHOT/keycloak-cas-services-25.0.5-20240919.003827-12.jar"
+        source = "https://artifacts.gatech.aws.robojackets.net/io/github/johnjcool/keycloak-cas-services/26.2.5-SNAPSHOT/keycloak-cas-services-26.2.5-20250612.201023-8.jar"
 
         options {
-          checksum = "sha1:5977450783b7598fac0bf39b6f3e3237659bcb09"
+          checksum = "sha1:f971bbed3e574ee6a71eb1625cd79addf8d36c78"
         }
       }
 
