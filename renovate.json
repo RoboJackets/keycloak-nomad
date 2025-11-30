@@ -11,8 +11,8 @@
     "customManagers": [
         {
             "customType": "regex",
-            "fileMatch": [
-                "^keycloak.nomad$"
+            "managerFilePatterns": [
+                "/^keycloak.nomad$/"
             ],
             "matchStrings": [
                 "\"quay\\.io\\/keycloak\\/keycloak:(?<currentValue>.+)\""
