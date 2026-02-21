@@ -8,7 +8,7 @@ job "keycloak" {
 
   datacenters = ["bcdc"]
 
-  type = "system"
+  type = "service"
 
   priority = var.priority
 
