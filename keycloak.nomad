@@ -5,6 +5,8 @@ job "keycloak" {
 
   type = "service"
 
+  priority = "${NOMAD_JOB_NAME}" == "keycloak-production" ? 90 : 10
+
   group "keycloak" {
     network {
       port "http" {}
