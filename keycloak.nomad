@@ -1,3 +1,8 @@
+variable "priority" {
+  type = number
+  description = "The priority for this job"
+}
+
 job "keycloak" {
   region = "campus"
 
@@ -5,7 +10,7 @@ job "keycloak" {
 
   type = "service"
 
-  priority = "${NOMAD_JOB_NAME}" == "keycloak-production" ? 90 : 10
+  priority = var.priority
 
   group "keycloak" {
     network {
