@@ -8,7 +8,7 @@ job "keycloak" {
 
   datacenters = ["bcdc"]
 
-  type = "service"
+  type = "system"
 
   priority = var.priority
 
@@ -154,13 +154,6 @@ EOH
         mode = "fail"
       }
     }
-  }
-
-  reschedule {
-    delay = "10s"
-    delay_function = "fibonacci"
-    max_delay = "60s"
-    unlimited = true
   }
 
   update {
