@@ -45,7 +45,7 @@ jobs:
         env:
           NOMAD_ADDR: https://nomad.bcdc.robojackets.net
         run: |
-          nomad run keycloak.nomad -var=priority=${{ inputs.environment == 'test' && '10 || '90' }}
+          nomad run keycloak.nomad -var=priority=${{ inputs.environment == 'test' && '10' || '90' }}
 
       - name: Wait for service to become healthy
         timeout-minutes: 2
