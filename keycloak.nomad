@@ -83,7 +83,7 @@ KC_PROXY_HEADERS=forwarded
 {{ if eq (env "NOMAD_JOB_NAME") "keycloak-test" }}
 KC_DB=dev-file
 KC_HOSTNAME_DEBUG=true
-KYC_LOG_LEVEL=ALL
+KC_LOG_LEVEL=ALL
 {{ end }}
 EOH
 
