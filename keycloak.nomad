@@ -80,6 +80,8 @@ KC_HOSTNAME_BACKCHANNEL_DYNAMIC=false
 KC_HEALTH_ENABLED=true
 KC_HTTP_ENABLED=true
 KC_PROXY_HEADERS=forwarded
+KC_SHUTDOWN_DELAY=20s
+KC_SHUTDOWN_TIMEOUT=5s
 {{ if eq (env "NOMAD_JOB_NAME") "keycloak-test" }}
 KC_DB=dev-file
 KC_HOSTNAME_DEBUG=true
@@ -161,6 +163,8 @@ EOH
           no-default-headers = true
         }
       }
+
+      shutdown_delay = "10s"
 
       restart {
         attempts = 1
