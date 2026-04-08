@@ -128,6 +128,20 @@ EOH
 
           interval = "1s"
 
+          name = "Readiness"
+          path = "/health/ready"
+          port = "management"
+          protocol = "http"
+          timeout = "1s"
+          type = "http"
+        }
+
+        check {
+          success_before_passing = 3
+          failures_before_critical = 2
+
+          interval = "1s"
+
           name = "OIDC Discovery"
           path = "/realms/master/.well-known/openid-configuration"
           port = "http"
