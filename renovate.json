@@ -21,5 +21,13 @@
             "datasourceTemplate": "docker",
             "versioningTemplate": "semver"
         }
+    ],
+    "packageRules": [
+        {
+            "matchManagers": [
+                "github-actions"
+            ],
+            "rangeStrategy": "replace"
+        }
     ]
 }
