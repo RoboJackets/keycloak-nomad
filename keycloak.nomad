@@ -24,7 +24,7 @@ job "keycloak" {
       consul {}
 
       config {
-        image = "quay.io/keycloak/keycloak:26.7.1"
+        image = "quay.io/keycloak/keycloak:26.7.2"
 
         force_pull = true
 
