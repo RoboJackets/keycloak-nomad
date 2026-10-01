@@ -70,7 +70,7 @@ job "keycloak" {
 {{ end }}
 KC_CACHE=local
 KC_DB=mysql
-KC_FEATURES=workflows:v1,http-optimized-serializers:v1
+KC_FEATURES=workflows:v1,http-optimized-serializers:v1,http-client:v2
 KC_FEATURES_DISABLED=kerberos,authorization,admin-fine-grained-authz,ciba,client-policies,device-flow,par,step-up-authentication,step-up-authentication-saml,persistent-user-sessions,organization,opentelemetry,token-exchange-standard,user-event-metrics,identity-brokering-api,jwt-authorization-grant,kubernetes-service-accounts,recovery-codes,update-email,twitter-broker
 KC_HTTP_MANAGEMENT_PORT={{ env "NOMAD_PORT_management" }}
 KC_HTTP_PORT={{ env "NOMAD_PORT_http" }}
